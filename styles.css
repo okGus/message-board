@@ -1,0 +1,80 @@
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero {
+    width: 100%;
+    height: 100vh;
+    background: rgb(252,176,69);
+    background: linear-gradient(90deg, rgba(252,176,69,1) 0%, rgba(253,29,101,1) 50%, rgba(252,176,69,1) 100%);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form {
+    background-color: white;
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.form .header {
+    font-size: 48px;
+    text-align: center;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+
+.form form {
+    padding: 0 40px;
+}
+
+.form form .input_field {
+    position: relative;
+    margin: 30px 0;
+}
+
+input[type=text] {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    margin: 2px 0;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.1);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+input[type=password] {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    margin: 2px 0;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.1);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+input[type=submit] {
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    border-radius: 20px;
+    color: white;
+    background: rgb(252,176,69);
+    font-size: 1.5rem;
+    margin: 0 0 30px 0;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    border-color: rgba(253,29,101,1);
+    transition: .5s;
+}

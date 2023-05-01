@@ -1,0 +1,4 @@
+<Directory "private">
+    Order Deny,ALlow
+    Deny from all
+</Directory>

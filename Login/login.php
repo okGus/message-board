@@ -10,7 +10,7 @@
         }
     }
 
-    $connection = mysqli_connect(DB_hostname, $config['username'], $config['password'], $config['dbname']);
+    /*$connection = mysqli_connect(DB_hostname, $config['username'], $config['password'], $config['dbname']);
 
     if ($connection->connect_error) {
         die("Connection failed: " . $connection->connect_error);
@@ -38,7 +38,7 @@
         else {
             $error_message = "Invalid username or password!";
         }
-    }
+    }*/
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +50,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Message Board</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Open+Sans&display=swap">
 </head>
 
 <body>

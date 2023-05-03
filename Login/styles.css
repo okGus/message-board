@@ -12,7 +12,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.form {
+.form-container {
     background-color: white;
     width: 30%;
     position: absolute;
@@ -22,18 +22,18 @@
     border-radius: 10px;
 }
 
-.form .header {
+.form-container .header {
     font-size: 48px;
     text-align: center;
     padding: 20px 0 20px 0;
     border-bottom: 1px solid silver;
 }
 
-.form form {
+.form-container form {
     padding: 0 40px;
 }
 
-.form form .input_field {
+.form-container form .input-field {
     position: relative;
     margin: 30px 0;
 }
@@ -99,7 +99,7 @@ input[type=submit]:hover {
 }
 
 #registration { 
-  text-align: center; 
+    text-align: center; 
 } 
 
 #registration a {

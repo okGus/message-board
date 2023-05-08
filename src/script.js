@@ -10,5 +10,6 @@ function checkUsername() {
             document.getElementById("availability").innerHTML = xhttp.responseText;
         }
     };
+
     xhttp.send(params);
 }

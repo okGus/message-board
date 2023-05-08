@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // add to db - users
+    // add new user
     // hash password before inserting
     $password = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO users (board_username, email, password) VALUES (?, ?, ?)";

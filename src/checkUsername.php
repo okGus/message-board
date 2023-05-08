@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Username available.";
     }
+
     $sql->close();
 }
 $connection->close()

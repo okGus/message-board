@@ -1,16 +1,18 @@
 <?php
     session_start();
-    $config = parse_ini_file('../private/config.ini');
+    $config = parse_ini_file('../../private/config.ini');
     define('DB_hostname', 'localhost');
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST['btnRegister'])) {
+            // redirects to register.php
+            session_destroy();
             header("Location: ../Register/register.php");
             exit();
         }
     }
 
-    /*$connection = mysqli_connect(DB_hostname, $config['username'], $config['password'], $config['dbname']);
+    $connection = mysqli_connect(DB_hostname, $config['username'], $config['password'], $config['dbname']);
 
     if ($connection->connect_error) {
         die("Connection failed: " . $connection->connect_error);
@@ -30,6 +32,8 @@
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['username'] = $username;
+            $stmt->close();
+            $connection->close();
             // redirects to dashboard.php
             header("Location: ../Dashboard/dashboard.php");
             // Make sure that code below does not get executed when redirect
@@ -38,7 +42,7 @@
         else {
             $error_message = "Invalid username or password!";
         }
-    }*/
+    }
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +66,7 @@
                     <input type="text" name="username" id="username" placeholder="Username" />
                 </div>
                 <div class="input-field">
-                    <input type="password" name="password" id="password" placeholder="Password" >
+                    <input type="password" name="password" id="password" placeholder="Password" />
                 </div>
                 <input type="submit" value="Log In" />
                 <input type="submit" name="btnRegister" value="Register"/>

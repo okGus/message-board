@@ -1,8 +1,7 @@
 # Message Board
-
 Using MySQL
 ```MySQL
-CREATE TABLE users(
+CREATE TABLE users (
     userid INT PRIMARY KEY AUTO_INCREMENT,
     password CHAR(60) NOT NULL,
     email CHAR(255) NOT NULL,
@@ -30,9 +29,9 @@ CREATE TABLE comments (
 );
 ```
 
-After cloning
-Create a private folder in root folder
-In folder create config.ini
+After cloning\
+Create a private folder in root folder\
+In folder create config.ini\
 Inside config.ini have your db credentials
 ```
 [database]

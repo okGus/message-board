@@ -1,8 +1,9 @@
 <?php
+
 session_start();
 
 if (!isset($_SESSION['username'])) {
-    header('Location: ../Login/login.php');
+    header('Location: ../login/login.php');
     exit();
 }
 
@@ -30,4 +31,41 @@ if ($response->num_rows > 0) {
 $connection->close();
 ?>
 
-<h1> Dashboard </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Open+Sans&display=swap">
+</head>
+<body>
+    <div class="hero">
+        <div class="header">
+            <div class="header-title">Message Board</div>
+            <div class="header-username"><img src="../../images/avatar.png" /><?php echo "username"; ?></div>
+        </div>
+        <div class="dashboard-header"><h1>Your Dashboard</h1></div>
+        <div class="form-container">
+            <form method="POST" action="">
+                <textarea id="messageText" name="messageText" placeholder="Start typing..." required></textarea>
+                <input type="submit" value="Post" />
+            </form>
+        </div>
+        <div class="content">
+            <span>HELLO</span>
+        </div>
+    </div>
+
+    <script>
+        const textarea = document.querySelector("textarea");
+        textarea.addEventListener("keyup", e => {
+            textarea.style.height = "64px";
+            let height = e.target.scrollHeight;
+            textarea.style.height = `${height}px`;
+        })
+    </script>
+</body>
+</html>

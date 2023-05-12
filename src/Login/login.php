@@ -1,53 +1,47 @@
 <?php
-    session_start();
-    $config = parse_ini_file('../../private/config.ini');
-    define('DB_hostname', 'localhost');
+session_start();
+$config = parse_ini_file('../../private/config.ini');
+define('DB_hostname', 'localhost');
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST['btnRegister'])) {
-            // redirects to register.php
-            session_destroy();
-            header("Location: ../Register/register.php");
-            exit();
-        }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['btnRegister'])) {
+        // redirects to register.php
+        session_destroy();
+        header("Location: ../register/register.php");
+        exit();
     }
+}
 
-    $connection = mysqli_connect(DB_hostname, $config['username'], $config['password'], $config['dbname']);
-
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
+$connection = mysqli_connect(DB_hostname, $config['username'], $config['password'], $config['dbname']);
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $stmt = $connection->prepare("SELECT * FROM users WHERE board_username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['username'] = $username;
+        $stmt->close();
+        $connection->close();
+        // redirects to dashboard.php
+        header("Location: ../dashboard/dashboard.php");
+        // Make sure that code below does not get executed when redirect
+        exit();
     }
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
-        $username = $_POST['username'] ?? '';
-        $password = $_POST['password'] ?? '';
-
-        $stmt = $connection->prepare("SELECT * FROM users WHERE board_username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-        $user = $result->fetch_assoc();
-
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['username'] = $username;
-            $stmt->close();
-            $connection->close();
-            // redirects to dashboard.php
-            header("Location: ../Dashboard/dashboard.php");
-            // Make sure that code below does not get executed when redirect
-            exit();
-        }
-        else {
-            $error_message = "Invalid username or password!";
-        }
+    else {
+        $error_message = "Invalid username or password!";
     }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,7 +50,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Open+Sans&display=swap">
 </head>
-
 <body>
     <div class="hero">
         <div class="form-container">
@@ -78,5 +71,4 @@
         </div>
     </div>
 </body>
-
 </html>

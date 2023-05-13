@@ -49,13 +49,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h1 class="register-header">Register</h1>
             <form action="register.php" method="POST">
                 <div class="input-field">
+                    <label for="username">Username</label>
                     <input type="text" name="username" id="username" placeholder="Username" required onchange="checkUsername()" />
                 </div>
                 <p id="availability"></p>
                 <div class="input-field">
+                    <label for="email">Email</label>
                     <input type="text" name="email" id="email" placeholder="Email" required />
                 </div>
                 <div class="input-field">
+                    <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="Password" required />
                 </div>
                 <input type="submit" value="Create Account" />

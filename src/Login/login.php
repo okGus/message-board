@@ -56,9 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h1 class="header">Message Board</h1>
             <form id="loginForm" action="login.php" method="POST">
                 <div class="input-field">
+                    <label for="username">Username</label>
                     <input type="text" name="username" id="username" placeholder="Username" />
                 </div>
                 <div class="input-field">
+                    <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="Password" />
                 </div>
                 <input type="submit" value="Log In" />

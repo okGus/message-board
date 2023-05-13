@@ -63,7 +63,7 @@ $connection->close();
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Open+Sans&display=swap">
 </head>
 <body>
-    <div class="hero">
+    <div class="main">
         <div class="header">
             <div class="header-title">Message Board</div>
             <div class="header-username"><img src="../../images/avatar.png" /><?php echo $username; ?></div>
@@ -71,6 +71,7 @@ $connection->close();
         <div class="dashboard-header"><h1>Your Dashboard</h1></div>
         <div class="form-container">
             <form method="POST" action="dashboard.php">
+                <input type="text" id="title" name="title" placeholder="Title" required />
                 <textarea id="messageText" name="messageText" placeholder="Start typing..." required></textarea>
                 <input type="submit" value="Post" />
             </form>
@@ -88,5 +89,6 @@ $connection->close();
             textarea.style.height = `${height}px`;
         })
     </script>
+    
 </body>
 </html>

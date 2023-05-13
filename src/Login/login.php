@@ -51,10 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Open+Sans&display=swap">
 </head>
 <body>
-    <div class="hero">
+    <div class="main">
         <div class="form-container">
             <h1 class="header">Message Board</h1>
-            <form action="login.php" method="POST">
+            <form id="loginForm" action="login.php" method="POST">
                 <div class="input-field">
                     <input type="text" name="username" id="username" placeholder="Username" />
                 </div>
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="password" name="password" id="password" placeholder="Password" />
                 </div>
                 <input type="submit" value="Log In" />
-                <input type="submit" name="btnRegister" value="Register"/>
+                <input type="submit" name="btnRegister" value="Register" />
             </form>
             <?php 
                 if (isset($error_message))

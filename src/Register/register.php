@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
         $connection->close();
         $_SESSION['username'] = $username;
-        header("Location: ../dashboard/dashboard.php");
+        header("Location: ../Dashboard/dashboard.php");
         exit();
     }
 }

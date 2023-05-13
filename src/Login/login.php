@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['btnRegister'])) {
         // redirects to register.php
         session_destroy();
-        header("Location: ../register/register.php");
+        header("Location: ../Register/register.php");
         exit();
     }
 }
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
         $connection->close();
         // redirects to dashboard.php
-        header("Location: ../dashboard/dashboard.php");
+        header("Location: ../Dashboard/dashboard.php");
         // Make sure that code below does not get executed when redirect
         exit();
     }

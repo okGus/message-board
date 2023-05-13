@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION['username'])) {
-    header('Location: ../login/login.php');
+    header('Location: ../Login/login.php');
     exit();
 }
 
@@ -28,6 +28,27 @@ if ($response->num_rows > 0) {
     }
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $messageText = $_POST['messageText'] ?? '';
+    $messageTitle = $_POST['title'] ?? '';
+    $dt = date('Y-m-d H:i:s');
+
+    $stmt = $connection->prepare("SELECT * FROM users WHERE board_username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $userid = $user['userid'];
+
+    $stmt->close();
+
+    $sql_in = "INSERT INTO post (title, body, userid, date_time) VALUES (?, ?, ?, ?)";
+    $stmt_in = $connection->prepare($sql_in);
+    $stmt_in->bind_param("ssis", $messageTitle, $messageText, $userid, $dt);
+    $stmt_in->execute();
+    $stmt_in->close();
+}
+
 $connection->close();
 ?>
 
@@ -45,11 +66,11 @@ $connection->close();
     <div class="hero">
         <div class="header">
             <div class="header-title">Message Board</div>
-            <div class="header-username"><img src="../../images/avatar.png" /><?php echo "username"; ?></div>
+            <div class="header-username"><img src="../../images/avatar.png" /><?php echo $username; ?></div>
         </div>
         <div class="dashboard-header"><h1>Your Dashboard</h1></div>
         <div class="form-container">
-            <form method="POST" action="">
+            <form method="POST" action="dashboard.php">
                 <textarea id="messageText" name="messageText" placeholder="Start typing..." required></textarea>
                 <input type="submit" value="Post" />
             </form>

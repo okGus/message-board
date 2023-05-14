@@ -45,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         while ($row = $response->fetch_assoc()) {
             echo "<script>console.log(" . json_encode($row) . ")</script>";
         }
+        
     }
 }
 
@@ -64,19 +65,19 @@ $connection->close();
 <body>
     <div class="main">
         <div class="header">
-            <div class="header-title">Message Board</div>
-            <div class="header-username"><img src="../../images/avatar.png" /><?php echo $username; ?></div>
+            <div class="header-title"><h2>Message Board</h2></div>
+            <div class="header-username"><img src="../../images/avatar.svg" /><h3><?php echo $username; ?></h3></div>
         </div>
-        <div class="dashboard-header"><h1>Your Dashboard</h1></div>
+        <div class="dashboard-header"><h1><?php echo $username . "'s Dashboard" ; ?></h1></div>
         <div class="form-container">
-            <form method="POST" action="dashboard.php">
+            <form action="dashboard.php" method="POST">
                 <input type="text" id="title" name="title" placeholder="Title" required />
                 <textarea id="messageText" name="messageText" placeholder="Start typing..." required></textarea>
                 <input type="submit" value="Post" />
             </form>
         </div>
         <div class="content">
-            <span>HELLO</span>
+            
         </div>
     </div>
 

@@ -23,9 +23,7 @@
 }
 
 .header-title {
-    width: 300px;
     height: 100%;
-    font-size: 2rem;
     text-align: center;
     vertical-align: middle;
     line-height: 60px;
@@ -34,11 +32,9 @@
 }
 
 .header-username {
-    width: 300px;
     height: 100%;
     display: flex;
     align-items: center;
-    font-size: 2rem;
     text-align: left;
     vertical-align: middle;
     line-height: 60px;
@@ -47,32 +43,30 @@
 }
 
 .header-username img {
-    width: 50px;
-    height: 50px;
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    margin-left: 7px;
+    margin-right: 7px;
 }
 
 .dashboard-header {
     margin-left: auto;
     margin-right: auto;
-    font-size: 1.5rem;
 }
 
 .form-container {
     width: 50%;
-    height: 25%;
+    height: 30%;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
     background-color: white;
-    border: 1px dotted red;
     border-bottom: 2px solid #bfbfbf;
 }
 
 .form-container form {
     width: 500px;
-    border: 1px dotted red;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
@@ -100,28 +94,6 @@
     width: 0px;
 }
 
-input[type=submit] {
-    height: 40px;
-	width: 100px;
-    color: white;
-    background: #ffbd03;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-
-}
-
-input[type=submit]:active,
-input[type=submit]:hover {
-    border-color: black;
-    outline: 0;
-}
-
 input[type=text] {
     width: 100%;
     height: 60px;
@@ -136,6 +108,28 @@ input[type=text]:focus {
     outline: none;
 }
 
+input[type=submit] {
+    height: 40px;
+	width: 100px;
+    color: white;
+    background: #ffbd03;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+    float: right;
+}
+
+input[type=submit]:active,
+input[type=submit]:hover {
+    border-color: black;
+    outline: 0;
+}
 
 .content {
     width: 50%;
@@ -143,4 +137,30 @@ input[type=text]:focus {
     margin-left: auto;
     margin-right: auto;
     background-color: white;
+}
+
+table {
+    width: 75%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+    border: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+tr:hover {
+    background-color: azure;
+}
+
+th {
+    background-color: lightgray;
+    text-align: left;
+    padding: 5px;
+}
+
+td {
+    border: 1px solid lightgray;
+    padding: 5px;
 }

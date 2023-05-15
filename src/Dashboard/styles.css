@@ -139,7 +139,16 @@ input[type=submit]:hover {
     background-color: white;
 }
 
-table {
+.post {
+    width: 100%;
+    background-color: #ccc;
+    font-size: 1rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+/*table {
     width: 75%;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -163,4 +172,4 @@ th {
 td {
     border: 1px solid lightgray;
     padding: 5px;
-}
+}*/

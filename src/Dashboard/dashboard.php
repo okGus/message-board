@@ -37,16 +37,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt_in->bind_param("ssis", $messageTitle, $messageText, $userid, $dt);
     $stmt_in->execute();
     $stmt_in->close();
+    $sql = "SELECT board_username, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid";
+    $result = mysqli_query($connection, $sql);
+
 } else {
     $sql = "SELECT board_username, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid";
-    $response = $connection->query($sql);
+    $result = mysqli_query($connection, $sql);
+
+    /*$posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    printTable($posts);*/
+    /*if(mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_array($result)) {
+            echo '<div class="post">';
+                echo $row['board_username']; 
+                echo $row['title']; 
+                echo $row['body']; 
+                echo $row['date_time']; 
+            echo '</div>';
+        }
+    }*/
+
+    /*$response = $connection->query($sql);
 
     if ($response->num_rows > 0) {
         while ($row = $response->fetch_assoc()) {
             echo "<script>console.log(" . json_encode($row) . ")</script>";
         }
-        
-    }
+    }*/
 }
 
 $connection->close();
@@ -77,7 +94,18 @@ $connection->close();
             </form>
         </div>
         <div class="content">
-            
+            <?php
+                if(mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_array($result)) { ?>
+                        <div class="post">
+                            <?php echo $row['board_username']. " "; ?>
+                            <?php echo $row['title']. " "; ?>
+                            <?php echo $row['body']. " "; ?>; 
+                            <?php echo $row['date_time']. " "; ?>
+                        </div>
+                <?php   }
+                }
+            ?>
         </div>
     </div>
 

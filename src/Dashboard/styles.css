@@ -74,7 +74,7 @@
 
 .form-container form textarea {
     width: 100%;
-    height: 60px;
+    height: 120px;
     padding: 15px;
     border: 2px solid #ddd;
     font-size: 1rem;
@@ -82,7 +82,7 @@
     resize: none;
     background: none;
     margin-top: 10px;
-    max-height: 120px;
+    /*max-height: 120px;*/
 }
 
 .form-container form textarea:is(:focus, :valid) {
@@ -127,8 +127,9 @@ input[type=submit] {
 
 input[type=submit]:active,
 input[type=submit]:hover {
-    border-color: black;
+    background: #f5b400;
     outline: 0;
+    transition: 0.5s;
 }
 
 .content {
@@ -141,35 +142,45 @@ input[type=submit]:hover {
 
 .post {
     width: 100%;
-    background-color: #ccc;
+    background: none;
     font-size: 1rem;
     margin-top: 10px;
     margin-bottom: 10px;
-    border-radius: 10px;
+    border: 2px solid #ccc;
 }
 
-/*table {
-    width: 75%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    table-layout: fixed;
-    border: 1px solid lightgray;
-    border-collapse: collapse;
+.post:hover {
+    border: 2px solid #ffbd03;
 }
 
-tr:hover {
-    background-color: azure;
+.post p {
+    padding: 15px;
 }
 
-th {
-    background-color: lightgray;
+.post-header {
+    width: 100%;
+    height: 50px;
+    font-size: 1rem;
+    color: black;
+    padding: 15px;
     text-align: left;
-    padding: 5px;
+    background: #ccc;
 }
 
-td {
-    border: 1px solid lightgray;
-    padding: 5px;
-}*/
+.post-header .post-title {
+    font-weight: 600;
+    font-size: 1rem;
+    float: left;
+}
+
+.post-header .post-username {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-left: 15px;
+}
+
+.post-header .post-time {
+    font-weight: 500;
+    font-size: 1rem;
+    float: right;
+}

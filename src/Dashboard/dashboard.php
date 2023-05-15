@@ -82,24 +82,26 @@ $connection->close();
                 if(mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_array($result)) { ?>
                         <div class="post">
-                            <?php echo $row['board_username']. " "; ?>
-                            <?php echo $row['title']. " "; ?>
-                            <?php echo $row['body']. " "; ?>; 
-                            <?php echo $row['date_time']. " "; ?>
+                            <div class="post-header">
+                                <span class="post-title"><?php echo $row['title'] ?></span>
+                                <span class="post-username"><?php echo $row['board_username'] ?></span>
+                                <span class="post-time"><?php echo $row['date_time'] ?></span>
+                            </div>
+                            <p><?php echo $row['body'] ?></p>
                         </div>
-                <?php   }
+                <?php }
                 }
             ?>
         </div>
     </div>
 
     <script>
-        const textarea = document.querySelector("textarea");
+        /*const textarea = document.querySelector("textarea");
         textarea.addEventListener("keyup", e => {
             textarea.style.height = "64px";
             let height = e.target.scrollHeight;
             textarea.style.height = `${height}px`;
-        })
+        })*/
     </script>
     
 </body>

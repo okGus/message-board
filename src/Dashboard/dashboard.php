@@ -41,12 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt_in->close();
 
     # Get post based on id
-    $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid LIMIT 5";
+    # Ordered by date, newest one first
+    $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid ORDER BY post.date_time DESC LIMIT 5";
     $result = mysqli_query($connection, $sql);
 
 } else {
     # Get post based on id
-    $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid LIMIT 5";
+    $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid ORDER BY post.date_time DESC LIMIT 5";
     $result = mysqli_query($connection, $sql);
 }
 

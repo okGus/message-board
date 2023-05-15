@@ -41,12 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt_in->close();
 
     # Get post based on id
-    $sql = "SELECT board_username, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid";
+    $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid LIMIT 5";
     $result = mysqli_query($connection, $sql);
 
 } else {
     # Get post based on id
-    $sql = "SELECT board_username, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid";
+    $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid LIMIT 5";
     $result = mysqli_query($connection, $sql);
 }
 
@@ -88,6 +88,22 @@ $connection->close();
                                 <span class="post-time"><?php echo $row['date_time'] ?></span>
                             </div>
                             <p><?php echo $row['body'] ?></p>
+                            <div class="post-footer">
+                                <button class="commment-button" id="post-id-<?php echo $row['id'] ?>">
+                                    <span class="button-content"><img src="../../images/down-arrow.svg" id="button-image"/></span>
+                                </button>
+                            </div>
+                            <div class="comment-section" id="comment-section-<?php echo $row['id'] ?>">
+                                <div class="comment-form-container">
+                                    <form action="dashboard.php" method="POST">
+                                        <textarea id="commentText" name="commentText" placeholder="Add a comment..." required></textarea>
+                                        <input type="submit" value="Comment" />
+                                    </form>
+                                </div>
+                                <div class="comment">
+
+                                </div>
+                            </div>
                         </div>
                 <?php }
                 }
@@ -96,12 +112,46 @@ $connection->close();
     </div>
 
     <script>
-        /*const textarea = document.querySelector("textarea");
-        textarea.addEventListener("keyup", e => {
-            textarea.style.height = "64px";
-            let height = e.target.scrollHeight;
-            textarea.style.height = `${height}px`;
-        })*/
+        // This script is for opening and closing the comment section under each post
+
+        // Get all buttons
+        const buttons = document.getElementsByTagName("button");
+            
+        // This function gets the Id of a post by using the comment button
+        // Once the post Id is extracted, the corresponding comment section is toggled to active
+        const handleButtonPressed = e => {
+            // Get post Id
+            var buttonId = e.target.id;
+
+            // Get the Id number from the end of the Id
+            var postId = buttonId.match(/\d+$/)[0];
+
+            // Get the corresponding comment section
+            var commentSection = document.getElementById("comment-section-" + postId);
+
+            if (commentSection) {
+                // Comment section is now active
+                commentSection.classList.toggle("active");
+
+                // Post Id
+                console.log(postId);
+
+                // Change the button image for displaying the comment section
+                var image = document.querySelector("#button-image");
+                if (image.src.endsWith("down-arrow.svg")) {
+                    image.src = "../../images/up-arrow.svg";
+                } else {
+                    image.src = "../../images/down-arrow.svg";
+                }
+            } else {
+                console.log("Comment section with Id '" + postId + "' was not found.");
+            }
+        }
+
+        // Add the function to each button when it is clicked
+        for (let button of buttons) {
+            button.addEventListener("click", handleButtonPressed);
+        }
     </script>
     
 </body>

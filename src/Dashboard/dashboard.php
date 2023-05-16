@@ -18,38 +18,71 @@ if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 
+
+# Get post based on id
+$sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid ORDER BY post.date_time DESC LIMIT 5";
+$result = mysqli_query($connection, $sql);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $messageText = $_POST['messageText'] ?? '';
-    $messageTitle = $_POST['title'] ?? '';
-    $dt = date('Y-m-d H:i:s');
+    if (isset($_POST['messageText'])) {    
+        $messageText = $_POST['messageText'] ?? '';
+        $messageTitle = $_POST['title'] ?? '';
+        $dt = date('Y-m-d H:i:s');
 
-    # Get username id to insert post based on that user id
-    $stmt = $connection->prepare("SELECT * FROM users WHERE board_username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-    $userid = $user['userid'];
+        # Get username id to insert post based on that user id
+        $stmt = $connection->prepare("SELECT * FROM users WHERE board_username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $userid = $user['userid'];
 
-    $stmt->close();
+        $stmt->close();
 
-    # Insert 
-    $sql_in = "INSERT INTO post (title, body, userid, date_time) VALUES (?, ?, ?, ?)";
-    $stmt_in = $connection->prepare($sql_in);
-    $stmt_in->bind_param("ssis", $messageTitle, $messageText, $userid, $dt);
-    $stmt_in->execute();
-    $stmt_in->close();
+        # Insert 
+        $sql_in = "INSERT INTO post (title, body, userid, date_time) VALUES (?, ?, ?, ?)";
+        $stmt_in = $connection->prepare($sql_in);
+        $stmt_in->bind_param("ssis", $messageTitle, $messageText, $userid, $dt);
+        $stmt_in->execute();
+        $stmt_in->close();
 
-    # Get post based on id
-    # Ordered by date, newest one first
-    $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid ORDER BY post.date_time DESC LIMIT 5";
-    $result = mysqli_query($connection, $sql);
+        # Get post based on id
+        # Ordered by date, newest one first
+        $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid ORDER BY post.date_time DESC LIMIT 5";
+        $result = mysqli_query($connection, $sql);
+    }
+    if (isset($_POST['commentText'])) {
+        $comment = $_POST['commentText'] ?? '';
+        $post_id = $_POST['id'] ?? ''; // to reference to correct post id
+        $dt = date('Y-m-d H:i:s');
+        
+        # Get username id to insert comment based on that user id
+        $stmt = $connection->prepare("SELECT * FROM users WHERE board_username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $userid = $user['userid'];
 
-} else {
-    # Get post based on id
-    $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid ORDER BY post.date_time DESC LIMIT 5";
-    $result = mysqli_query($connection, $sql);
-}
+        $stmt->close();
+
+        # Insert 
+        $sql_in = "INSERT INTO comments (userid, postid, body, date_time) VALUES (?, ?, ?, ?)";
+        $stmt_in = $connection->prepare($sql_in);
+        $stmt_in->bind_param("iiss", $userid, $post_id, $comment, $dt);
+        $stmt_in->execute();
+        $stmt_in->close();
+
+        $_SESSION['username'] = $username;
+        header("Location: dashboard.php");
+        exit();
+    }
+} 
+// else {
+//     # Get post based on id
+//     $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid ORDER BY post.date_time DESC LIMIT 5";
+//     $result = mysqli_query($connection, $sql);
+// }
 
 $connection->close();
 ?>
@@ -97,6 +130,7 @@ $connection->close();
                             <div class="comment-section" id="comment-section-<?php echo $row['id'] ?>">
                                 <div class="comment-form-container">
                                     <form action="dashboard.php" method="POST">
+                                        <input hidden="hidden" id="id" name="id" value="<?php echo $row['id'] ?>"></input>
                                         <textarea id="commentText" name="commentText" placeholder="Add a comment..." required></textarea>
                                         <input type="submit" value="Comment" />
                                     </form>
@@ -135,7 +169,7 @@ $connection->close();
                 commentSection.classList.toggle("active");
 
                 // Post Id
-                console.log(postId);
+                // console.log(postId);
 
                 // Change the button image for displaying the comment section
                 var image = document.querySelector("#button-image");

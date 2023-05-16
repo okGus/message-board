@@ -39,3 +39,10 @@ username = ""
 password = ""
 dbname = ""
 ```
+
+To run locally
+```bash
+php -S localhost:9999
+```
+or what ever other port you want then go to\
+localhost:9999/src/Login/login.php

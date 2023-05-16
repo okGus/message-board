@@ -23,6 +23,11 @@ if ($connection->connect_error) {
 $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid ORDER BY post.date_time DESC LIMIT 5";
 $result = mysqli_query($connection, $sql);
 
+# Get comments
+$sql_c = "SELECT board_username, post.id, post.title, post.body, post.date_time, comments.body, comments.date_time
+          FROM ((users INNER JOIN post ON users.userid = post.userid) INNER JOIN comments ON comments.postid = post.id)";
+$comment_result = mysqli_query($connection, $sql_c);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['messageText'])) {    
         $messageText = $_POST['messageText'] ?? '';

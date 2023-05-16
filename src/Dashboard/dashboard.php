@@ -22,9 +22,9 @@ $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FR
 $result = mysqli_query($connection, $sql);
 
 # Get comments
-$sql_c = "SELECT board_username, post.id, comments.body, comments.date_time, comments.postid
+/*$sql_c = "SELECT board_username, post.id, comments.body, comments.date_time, comments.postid
         FROM ((users INNER JOIN post ON users.userid = post.userid) INNER JOIN comments ON comments.postid = post.id)";
-$comment_result = mysqli_query($connection, $sql_c);
+$comment_result = mysqli_query($connection, $sql_c);*/
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['messageText'])) {
@@ -85,13 +85,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
-// else {
-//     # Get post based on id
-//     $sql = "SELECT board_username, post.id, post.title, post.body, post.date_time FROM users INNER JOIN post ON users.userid = post.userid ORDER BY post.date_time DESC LIMIT 5";
-//     $result = mysqli_query($connection, $sql);
-// }
 
-$connection->close();
+//$connection->close();
 ?>
 
 <!DOCTYPE html>
@@ -129,7 +124,8 @@ $connection->close();
         <div class="content">
             <?php
             if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_array($result)) { ?>
+                while ($row = mysqli_fetch_array($result)) {
+                    $postId = $row['id'] ?>
                     <div class="post">
                         <div class="post-header">
                             <span class="post-title"><?php echo $row['title'] ?></span>
@@ -138,29 +134,38 @@ $connection->close();
                         </div>
                         <p><?php echo $row['body'] ?></p>
                         <div class="post-footer">
-                            <button class="commment-button" id="button-id-<?php echo $row['id'] ?>">
-                                <span class="button-content"><img src="../../images/down-arrow.svg" id="button-image-<?php echo $row['id'] ?>" /></span>
+                            <button class="commment-button" id="button-id-<?php echo $postId ?>">
+                                <span class="button-content"><img src="../../images/down-arrow.svg" id="button-image-<?php echo $postId ?>" /></span>
                             </button>
                         </div>
-                        <div class="comment-section" id="comment-section-<?php echo $row['id'] ?>">
+                        <div class="comment-section" id="comment-section-<?php echo $postId ?>">
                             <div class="comment-form-container">
                                 <form action="dashboard.php" method="POST">
-                                    <input hidden="hidden" id="id" name="id" value="<?php echo $row['id'] ?>"></input>
+                                    <input hidden="hidden" id="id" name="id" value="<?php echo $postId ?>"></input>
                                     <textarea id="commentText" name="commentText" placeholder="Add a comment..." required></textarea>
                                     <input type="submit" id="comment-button" value="Comment" />
                                 </form>
                             </div>
                             <div class="comments-container">
                                 <?php
-                                if (mysqli_num_rows($comment_result) > 0) {
-                                    while ($commentRow = mysqli_fetch_array($comment_result)) { ?>
-                                        <div class="comment">
-                                            <div class="comment-header">
-                                                <span class="comment-username"><?php echo $commentRow['board_username'] ?></span>
-                                                <span class="comment-time"><?php echo $commentRow['date_time'] ?></span>
+                                # Get comments for the current post
+                                $sql_c = "SELECT comments.body, users.board_username, comments.date_time, comments.postid
+                                            FROM comments
+                                            JOIN users ON comments.userid = users.userid
+                                            WHERE comments.postid = $postId";
+                                $post_comments = mysqli_query($connection, $sql_c);
+
+                                if (mysqli_num_rows($post_comments) > 0) {
+                                    while ($commentRow = mysqli_fetch_array($post_comments)) {
+                                        if ($commentRow['postid'] == $postId) { ?>
+                                            <div class="comment">
+                                                <div class="comment-header">
+                                                    <span class="comment-username"><?php echo $commentRow['board_username'] ?></span>
+                                                    <span class="comment-time"><?php echo $commentRow['date_time'] ?></span>
+                                                </div>
+                                                <p><?php echo $commentRow['body'] ?></p>
                                             </div>
-                                            <p><?php echo $commentRow['body'] ?></p>
-                                        </div>
+                                        <?php   } ?>
                                 <?php
                                     }
                                 }
@@ -173,6 +178,8 @@ $connection->close();
             ?>
         </div>
     </div>
+
+    <?php $connection->close(); ?>
 
     <script>
         // This script is for opening and closing the comment section under each post

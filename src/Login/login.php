@@ -17,7 +17,7 @@ if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
@@ -37,8 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../Dashboard/dashboard.php");
         // Make sure that code below does not get executed when redirect
         exit();
-    }
-    else {
+    } else {
         $error_message = "Invalid username or password!";
     }
 }
@@ -46,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Open+Sans&display=swap">
 </head>
+
 <body>
     <div class="main">
         <div class="form-container">
@@ -70,11 +71,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="submit" value="Log In" />
                 <input type="submit" name="btnRegister" value="Register" />
             </form>
-            <?php 
-                if (isset($error_message))
-                    echo '<p id="error">' . $error_message . '</p>';
+            <?php
+            if (isset($error_message))
+                echo '<p id="error">' . $error_message . '</p>';
             ?>
         </div>
     </div>
 </body>
+
 </html>

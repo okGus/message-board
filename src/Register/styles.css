@@ -1,15 +1,20 @@
-* { 
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 .main {
     width: 100%;
     height: 100vh;
-    background: rgb(252,176,69);
-    background: linear-gradient(90deg, rgba(252,176,69,1) 0%, rgba(253,29,101,1) 50%, rgba(252,176,69,1) 100%);
+    background: rgb(252, 176, 69);
+    background: linear-gradient(
+        90deg,
+        rgba(252, 176, 69, 1) 0%,
+        rgba(253, 29, 101, 1) 50%,
+        rgba(252, 176, 69, 1) 100%
+    );
 }
 
 .register-container {
@@ -33,7 +38,7 @@
     padding: 0 40px;
 }
 
-.register-container  form .input-field {
+.register-container form .input-field {
     position: relative;
     margin: 30px 0;
 }
@@ -45,8 +50,8 @@
     font-weight: 500;
 }
 
-input[type=text],
-input[type=password] {
+input[type="text"],
+input[type="password"] {
     width: 100%;
     height: 60px;
     padding: 15px;
@@ -54,21 +59,16 @@ input[type=password] {
     padding: 15px;
     background: none;
     border: 2px solid #ccc;
-    /*border: 0;
-    border-radius: 10px;
-    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.1);
-    font-family: inherit;
-    */
     font-size: 1rem;
 }
 
-input[type=text]:focus,
-input[type=password]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus {
     outline: none;
     background-color: #eee;
 }
 
-input[type=submit] {
+input[type="submit"] {
     width: 100%;
     height: 60px;
     border: 2px solid;
@@ -81,9 +81,8 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
-    /*border-color: rgb(252,176,69);*/
-    background-color: rgb(252,176,69);
+input[type="submit"]:hover {
+    background-color: rgb(252, 176, 69);
     color: white;
-    transition: .5s;
+    transition: 0.5s;
 }

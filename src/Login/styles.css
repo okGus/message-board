@@ -1,15 +1,20 @@
-* { 
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 .main {
     width: 100%;
     height: 100vh;
-    background: rgb(252,176,69);
-    background: linear-gradient(90deg, rgba(252,176,69,1) 0%, rgba(253,29,101,1) 50%, rgba(252,176,69,1) 100%);
+    background: rgb(252, 176, 69);
+    background: linear-gradient(
+        90deg,
+        rgba(252, 176, 69, 1) 0%,
+        rgba(253, 29, 101, 1) 50%,
+        rgba(252, 176, 69, 1) 100%
+    );
 }
 
 .form-container {
@@ -45,8 +50,8 @@
     font-weight: 500;
 }
 
-input[type=text],
-input[type=password] {
+input[type="text"],
+input[type="password"] {
     width: 100%;
     height: 60px;
     padding: 15px;
@@ -62,13 +67,13 @@ input[type=password] {
     font-size: 1rem;
 }
 
-input[type=text]:focus,
-input[type=password]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus {
     outline: none;
     background-color: #eee;
 }
 
-input[type=submit] {
+input[type="submit"] {
     width: 100%;
     height: 60px;
     border: 2px solid;
@@ -81,11 +86,11 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
+input[type="submit"]:hover {
     /*border-color: rgb(252,176,69);*/
-    background-color: rgb(252,176,69);
+    background-color: rgb(252, 176, 69);
     color: white;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 #error {
@@ -102,7 +107,7 @@ input[type=submit]:hover {
     border: 1px solid;
     border-radius: 20px;
     color: white;
-    background: rgb(252,176,69);
+    background: rgb(252, 176, 69);
     font-size: 1.5rem;
     margin: 0 0 30px 0;
     cursor: pointer;
@@ -110,13 +115,13 @@ input[type=submit]:hover {
 
 /* input[value="Register"]:hover { */
 #registration {
-    border-color: rgba(253,29,101,1);
-    transition: .5s;
+    border-color: rgba(253, 29, 101, 1);
+    transition: 0.5s;
 }
 
-#registration { 
-    text-align: center; 
-} 
+#registration {
+    text-align: center;
+}
 
 #registration a {
     position: relative;

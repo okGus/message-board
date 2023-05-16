@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 $config = parse_ini_file('../../private/config.ini');
@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,9 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Open+Sans&display=swap">
 </head>
+
 <body>
     <div class="main">
-        <div class = "register-container">
+        <div class="register-container">
             <h1 class="register-header">Register</h1>
             <form action="register.php" method="POST">
                 <div class="input-field">
@@ -67,4 +69,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <script src="../script.js"></script>
 </body>
+
 </html>

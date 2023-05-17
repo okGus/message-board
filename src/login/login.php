@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['btnRegister'])) {
         // redirects to register.php
         session_destroy();
-        header("Location: ../Register/register.php");
+        header("Location: ../register/register.php");
         exit();
     }
 }
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
         $connection->close();
         // redirects to dashboard.php
-        header("Location: ../Dashboard/dashboard.php");
+        header("Location: ../dashboard/dashboard.php");
         // Make sure that code below does not get executed when redirect
         exit();
     } else {
@@ -51,14 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Message Board</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/login-register.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Open+Sans&display=swap">
 </head>
 
 <body>
     <div class="main">
         <div class="form-container">
-            <h1 class="header">Message Board</h1>
+            <h1 class="form-header">Message Board</h1>
             <form id="loginForm" action="login.php" method="POST">
                 <div class="input-field">
                     <label for="username">Username</label>

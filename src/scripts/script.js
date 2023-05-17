@@ -8,8 +8,7 @@ function checkUsername() {
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200) {
-            document.getElementById("availability").innerHTML =
-                xhttp.responseText;
+            document.getElementById("error").innerHTML = xhttp.responseText;
         }
     };
 

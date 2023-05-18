@@ -46,3 +46,9 @@ php -S localhost:9999
 ```
 or what ever other port you want then go to\
 localhost:9999/src/login/login.php
+
+<img src="Login Failed.gif">
+
+<img src="Register.gif">
+
+<img src="comments and posts.gif">

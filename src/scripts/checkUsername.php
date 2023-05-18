@@ -1,5 +1,5 @@
 <?php 
-$config = parse_ini_file('../private/config.ini');
+$config = parse_ini_file('../../private/config.ini');
 define('DB_hostname', 'localhost');
 
 $connection = mysqli_connect(DB_hostname, $config['username'], $config['password'], $config['dbname']);

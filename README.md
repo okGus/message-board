@@ -45,4 +45,4 @@ To run locally
 php -S localhost:9999
 ```
 or what ever other port you want then go to\
-localhost:9999/src/Login/login.php
+localhost:9999/src/login/login.php
